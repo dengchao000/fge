@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="libevent"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="D:\mywork\Server\libevent\WIN32-Code"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="libevent.lib"
+		AdditionalLibraryDirectories=""
+	/>
+	<UserMacro
+		Name="LIBEVENT"
+		Value="D:\mywork\Server\libevent\WIN32-Prj"
+	/>
+</VisualStudioPropertySheet>

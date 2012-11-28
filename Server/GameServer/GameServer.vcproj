@@ -21,7 +21,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets=".\libevent.vsprops"
+			InheritedPropertySheets=".\fge2.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -96,7 +96,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets=".\libevent.vsprops"
+			InheritedPropertySheets=".\fge2.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -176,14 +176,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\fgeCore\fgeFile.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\fgeCore\fgeLog.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\GameServer.cpp"
 				>
 			</File>
@@ -214,10 +206,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\Include\fgeLog.h"
-				>
-			</File>
-			<File
 				RelativePath=".\stdafx.h"
 				>
 			</File>
@@ -234,6 +222,30 @@
 		</Filter>
 		<Filter
 			Name="Net"
+			>
+		</Filter>
+		<Filter
+			Name="Fge"
+			>
+			<File
+				RelativePath="..\..\fgeCore\fgeFile.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgeLog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeLog.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Script"
+			>
+		</Filter>
+		<Filter
+			Name="Game"
 			>
 		</Filter>
 		<File
