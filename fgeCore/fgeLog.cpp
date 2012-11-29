@@ -110,9 +110,10 @@ namespace fge
 			vformatstr(pbuf,buflen, fmt, ap);
 		else
 			vformatstr(pbuf,buflen, fmt, ap);
-		strcat(pbuf,"\n");
+		
 		m_cs.Enter();
 		m_logbuf.Write(tmp,strlen(tmp));
+		m_logbuf.Write("\n",strlen("\n"));
 		m_cs.Leave();
 
 		if( (clock() - m_lastLogTime)>2 || m_logbuf.GetLen() >= 16*1024 )
