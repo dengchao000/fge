@@ -1,0 +1,84 @@
+/** 
+** Author:	邓超
+** QQ:		23427470
+** Mail:	aron_d@yeah.net
+** Time:	
+*
+** Fly Game 2 [ Sparrow ]
+** Copyright (C) 2005-, Fantasy Games
+** Kernel functions
+*
+*  版本	 :	1.0
+*  描述  :  压缩/解压工具
+**/
+
+#pragma once
+//#include <fgeutil.h>
+//#include <fgeLzStream.h>
+#include <ostream>
+#include <istream>
+
+namespace fge
+{		
+	const int WND_SIZE = 4096;	/* size of ring buffer */
+	const int DIC_SIZE = 16384;	/* size of dictionary */
+	const int F = 18;			/* upper limit for match_length */
+	const int THRESHOLD = 3;   	/* encode string into position and length	最小匹配长度 */
+	
+	/** 词典索引 */
+	struct lzdWord
+	{
+		int		id;		
+		int		offset;		
+		lzdWord( ){ offset = -1; id = -1;}
+		lzdWord( DWORD _id, int _offset ){ id = _id; offset = _offset; }
+	private:
+		lzdWord( const lzdWord& word ){ }
+		lzdWord& operator= (const lzdWord& word) { return *this; }
+	};
+	/** lzd编码 */
+	struct lzdCode
+	{
+		DWORD	isCompressed:1;
+		DWORD	len:12;
+		DWORD	offset:19;
+	};
+	/** 压缩类 */
+	class lzdCompress
+	{
+	public:
+		lzdCompress(void);
+		virtual ~lzdCompress(void);
+
+		int		Encode( std::istream *in, std::ostream *out );
+		void	ClearWnd( );
+	private:
+		void	OutCode(BYTE* buf,int len,int offset);
+		void	DeleteNode( int p );
+		void	InsertNode( int p,bool match=true );
+	private:
+		std::istream  *m_istream;
+		std::ostream  *m_ostream;
+	private:
+		BYTE	m_iobuf[256];
+		BYTE*	m_pEncodeBuf;
+		int		m_bufsize;
+		int		m_wordip,m_ip;//m_ip为窗口指针,m_wordip词条指针
+		lzdWord m_dic[DIC_SIZE];
+		int		m_match_position,m_match_length;
+	};
+	/** 解压类 */
+	class lzdDecompression
+	{
+	public:
+		lzdDecompression(void);
+		virtual ~lzdDecompression(void);
+		int		Decode( std::istream *in, std::ostream *out );
+		void	ClearWnd( );
+	private:
+		BYTE	m_iobuf[256];
+		BYTE*	m_pDecodeBuf;
+		int		m_bufsize;
+		int		m_ip;			//m_ip为窗口指针
+	};
+}

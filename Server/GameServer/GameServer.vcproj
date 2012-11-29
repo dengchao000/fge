@@ -239,6 +239,14 @@
 				RelativePath="..\..\Include\fgeLog.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgeLzCompress.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeLzCompress.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Script"

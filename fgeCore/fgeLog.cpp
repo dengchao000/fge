@@ -128,11 +128,11 @@ namespace fge
 		m_logbuf.ReSet();
 	}
 
-	void CLog::WirteBinFile( const char* file, void* bin, unsigned long binLen )
+	void CLog::WirteBinFile( const char* file, const void* bin, unsigned long binLen )
 	{
 		MLOCK lk(s_cs);	// 多线程安全
-		HANDLE hFile = CreateFileA( file, FILE_WRITE_DATA | FILE_READ_DATA, FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL );
-		if(!hFile) return;
+		HANDLE hFile = CreateFileA( file, FILE_WRITE_DATA | FILE_READ_DATA, FILE_SHARE_READ, NULL, CREATE_ALWAYS, NULL, NULL );
+		if(INVALID_HANDLE_VALUE == hFile) return;
 
 		DWORD dwWrite;
 		if( false == ::WriteFile( hFile, bin, binLen, &dwWrite, NULL ) )
@@ -144,7 +144,7 @@ namespace fge
 
 	}
 
-	void CLog::BinTrunToTxt(char *text, unsigned long textLen, void* bin, unsigned long binLen)
+	void CLog::BinTrunToTxt(char *text, unsigned long textLen, const void* bin, unsigned long binLen)
 	{
 		MLOCK lk(s_cs);	// 多线程安全
 

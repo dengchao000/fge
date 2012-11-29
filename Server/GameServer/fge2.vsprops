@@ -2,15 +2,14 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="libevent"
+	Name="fge2"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="D:\mywork\Server\libevent\WIN32-Code"
+		AdditionalIncludeDirectories="D:\mywork\GitHub\fge2.6.0\Include"
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalDependencies="libevent.lib"
 		AdditionalLibraryDirectories=""
 	/>
 	<UserMacro

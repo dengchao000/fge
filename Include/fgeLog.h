@@ -44,8 +44,8 @@ namespace fge
 	private:
 		void		Log(int severity, const char *fmt, va_list ap);
 	public:		
-		static void WirteBinFile(const char* file, void* bin, unsigned long binLen);					// 写二进制文件
-		static void BinTrunToTxt(char *text,unsigned long textLen, void* bin, unsigned long binLen);	// 将二进制转化为文本文件便于查看
+		static void WirteBinFile(const char* file, const void* bin, unsigned long binLen);					// 写二进制文件
+		static void BinTrunToTxt(char *text,unsigned long textLen, const void* bin, unsigned long binLen);	// 将二进制转化为文本文件便于查看
 
 	private:
 		std::string		m_strName;

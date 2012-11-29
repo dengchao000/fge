@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="fge2.5"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="&quot;$(fge2.5)&quot;;&quot;$(fge2.5)include&quot;;&quot;$(fge2.5)luahelp&quot;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="$(fge2.5)lib2008"
+	/>
+	<UserMacro
+		Name="fge2.5"
+		Value="D:\MyWork\fge2.5\"
+	/>
+</VisualStudioPropertySheet>
