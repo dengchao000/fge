@@ -19,27 +19,18 @@ int _tmain(int argc, _TCHAR* argv[])
 	char ostr2[200]; 
 	memset(ostr,0,sizeof(ostr));
 	memset(ostr2,0,sizeof(ostr2));
-	std::istringstream si(str.c_str(),str.length());
-	std::ostringstream so(ostr,fge::arraySize(ostr));
-	if(S_OK != lzd.Encode(&si,&so))
+
+	size_t codeLen = lzdEncode(str.c_str(),str.length(),ostr,arraySize(ostr));
+	if(!codeLen)
 	{
 		fge::log_warn("Encode Ê§°Ü");
 	}
 	else
 	{
-		fge::lzdDecompression lz;
-		std::ostringstream sdo(ostr2,fge::arraySize(ostr2));
-		std::stringbuf* sbuf = so.rdbuf();
-		std::istringstream sdi(sbuf->str());
-		lz.Decode(&sdi,&sdo);
-
-		fge::log_debug("aaaaaaaaaaaaaaaaaaa");
-		fge::log_debug("ccccccccccccccccccc");
+		lzdDecode(ostr,codeLen,ostr2,arraySize(ostr2));
 		fge::CLog log("logtest.txt");
-		log.SetDisplaySeverity(1);
-		log.Debug("bbbbbbbbbbbbbbbbbbbbbbb");
-		log.Error("eeeeeeeeeeeeeeeeeeeeeeeeee");
-		log.WirteBinFile("test.lzd",sdo.str().c_str(),sdo.str().length());
+		log.Debug(ostr2);
+		log.WirteBinFile("test.lzd",ostr,codeLen);
 	}
 	return 0;
 }
