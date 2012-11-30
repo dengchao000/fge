@@ -38,6 +38,7 @@
 *  作者  :	邓超
 *  描述  :	
 *			使用树结构对计时器进行管理,对ModifyClcok和DestroyTimer两个函数做了优化,使之可以在Update回调的过程中调用.
+*  版本	 :  5
 *
 */
 
@@ -48,6 +49,9 @@
 #include <fgeSharedObject.h>
 #include <time.h>
 #include <map>
+#include <strstream>
+#include "fgeMinHeap.h"
+
 namespace fge{
 	//#include <mmsystem.h>
 	/**
@@ -105,7 +109,7 @@ namespace fge{
 			}
 		}
 		//取消计时
-		virtual void	OnCancel( unsigned timerid )
+		virtual void OnCancel( unsigned timerid )
 		{
 			T* refThis = mThis.Lock();
 			if(refThis && mCancel)
@@ -145,27 +149,29 @@ namespace fge{
 		void	SetCyc( unsigned lClockCycle )		{ m_lClockCycle = lClockCycle;	}
 
 		//是否超时
-		bool	IsTimeOut( ){ return m_lStartingTime && clock() - m_lStartingTime >= m_lClockCycle ? true : false;	}
+		bool	IsTimeOut( )const { return m_lStartingTime && clock() - m_lStartingTime >= m_lClockCycle ? true : false;	}
 		//是否已经启动
-		bool	IsStart( )	{ return m_lStartingTime!=0; }
+		bool	IsStart( )	const { return m_lStartingTime!=0; }
 		//重置
 		void	ReSet( )	{ m_lStartingTime+=m_lClockCycle; }//{ m_lStartingTime = clock(); }
 
 		//测试计时器的剩余时间.如果返回为0,则时间已到. 如果返回<0,则已经超时.
-		int		TestTime( )	{ return m_lStartingTime + (0x0fffffff&m_lClockCycle) - clock(); }
+		int		TestTime( )	const { return m_lStartingTime + (0x0fffffff&m_lClockCycle) - clock(); }
 		//计算当前过去了多少时间
-		unsigned	PassTime( )	{ return clock() - m_lStartingTime; }
+		unsigned	PassTime( )	const { return clock() - m_lStartingTime; }
 		//计算结束时间
-		unsigned	OverTime( )	{ return m_lStartingTime+m_lClockCycle; }
+		unsigned	OverTime( )	const { return m_lStartingTime+m_lClockCycle; }
 	};
 	struct SClock : public SharedObject
 	{
 		unsigned	id;
+		unsigned	min_heap_idx;		//在堆中的索引
 		int			count;				//计数
 		CTimer		timer;				//计时器对象
 		ITimeEvent	*callback;			//回调函数
 		int 		flag;
-
+		
+		bool operator> (SClock& r) { return timer.OverTime()>r.timer.OverTime(); }
 		SClock( ){
 			callback = 0;
 		}
@@ -205,10 +211,10 @@ namespace fge{
 		int		TestTime(HCLOCK& hclock);
 		int		PassTime(HCLOCK& hclock);
 
-	private:
-		typedef std::multimap<unsigned,SClock*> TimeMap;
-		TimeMap					m_clockList;
-		std::list<SClock*>		m_reloadList;
+	private:		
+		typedef min_heap_t<SClock> TimeQueue;
+
+		TimeQueue			m_clockList;
 	};
 	typedef CClock CClockManager;
 }

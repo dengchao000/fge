@@ -95,11 +95,11 @@ namespace fge
 		int		m_ip;			//m_ipÎª´°¿ÚÖ¸Õë
 	};
 
-	class lzdStream :public lzdIStream, public lzdOStream
+	class lzdByteStream :public lzdIStream, public lzdOStream
 	{
 	public:
-		lzdStream( void* pbuf, size_t len );
-		lzdStream( const void* pbuf, size_t len );
+		lzdByteStream( void* pbuf, size_t len );
+		lzdByteStream( const void* pbuf, size_t len );
 		virtual int Read(void *buf, int count);
 		virtual int Write(const void *buf, int count);
 		virtual void Flush( ){};
