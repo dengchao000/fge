@@ -228,6 +228,14 @@
 			Name="Fge"
 			>
 			<File
+				RelativePath="..\..\fgeCore\fgeClock.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeClock.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\fgeCore\fgeFile.cpp"
 				>
 			</File>
@@ -245,6 +253,10 @@
 			</File>
 			<File
 				RelativePath="..\..\Include\fgeLzCompress.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeMinHeap.h"
 				>
 			</File>
 		</Filter>

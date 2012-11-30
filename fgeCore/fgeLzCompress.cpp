@@ -351,19 +351,19 @@ namespace fge
 	}
 
 	//---------------------------------------------------------------
-	lzdStream::lzdStream( void* pbuf, size_t len )
+	lzdByteStream::lzdByteStream( void* pbuf, size_t len )
 		:m_writBuf((char*)pbuf)
 	{
 		m_buflen = len;
 		m_curpos = 0;
 	}
-	lzdStream::lzdStream( const void* pbuf, size_t len )
+	lzdByteStream::lzdByteStream( const void* pbuf, size_t len )
 		:m_readBuf((const char*)pbuf)
 	{
 		m_buflen = len;
 		m_curpos = 0;
 	}
-	int lzdStream::Read(void *buf, int count)
+	int lzdByteStream::Read(void *buf, int count)
 	{
 		if(count+m_curpos > m_buflen)
 			count = m_buflen-m_curpos;
@@ -371,7 +371,7 @@ namespace fge
 		m_curpos += count;
 		return count;
 	}
-	int lzdStream::Write(const void *buf, int count)
+	int lzdByteStream::Write(const void *buf, int count)
 	{
 		if(count+m_curpos > m_buflen)
 			count = m_buflen-m_curpos;
@@ -384,8 +384,8 @@ namespace fge
 	{
 		static lzdCompress lz;
 		lz.ClearWnd();
-		lzdStream outstream(encodeBuf,bufLen);
-		lzdStream instream(pdata,len);
+		lzdByteStream outstream(encodeBuf,bufLen);
+		lzdByteStream instream(pdata,len);
 		lz.Encode(&instream,&outstream);
 		return outstream.Len();
 	}
@@ -393,8 +393,8 @@ namespace fge
 	{
 		static lzdDecompression lz;
 		lz.ClearWnd();
-		lzdStream outstream(decodeBuf,bufLen);
-		lzdStream instream(pdata,len);
+		lzdByteStream outstream(decodeBuf,bufLen);
+		lzdByteStream instream(pdata,len);
 		lz.Decode(&instream,&outstream);
 		return outstream.Len();
 	}

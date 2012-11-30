@@ -7,40 +7,56 @@
 #include "fgeLzCompress.h"
 
 #include <strstream>
+#include <algorithm>
+#include <deque>
+#include <functional>
+#include <vector>
+
+#include "fgeClock.h"
 
 #define nil 0
 using namespace fge;
 
+struct Test : public fge::SharedObject
+{
+	void OnTimer( )
+	{
+		printf("OnTimer");
+	}
+	void OnTimer1( )
+	{
+		static int n = 1;
+		printf("OnTimer %d\n",n++);
+		this->n = n;
+	}
+	int n;
+};
 int _tmain(int argc, _TCHAR* argv[])
 {
-	fge::lzdCompress lzd;
-	std::string str = "aaaaaaaaaaaaaaaaaadddddddfasdfkj;askdjfkasdklkgdfgfgjjjjjjjjjjjjjjjjasdkfalsdl";
-	char ostr[200]; 
-	char ostr2[200]; 
-	memset(ostr,0,sizeof(ostr));
-	memset(ostr2,0,sizeof(ostr2));
-	std::istringstream si(str.c_str(),str.length());
-	std::ostringstream so(ostr,fge::arraySize(ostr));
-	if(S_OK != lzd.Encode(&si,&so))
-	{
-		fge::log_warn("Encode Ê§°Ü");
-	}
-	else
-	{
-		fge::lzdDecompression lz;
-		std::ostringstream sdo(ostr2,fge::arraySize(ostr2));
-		std::stringbuf* sbuf = so.rdbuf();
-		std::istringstream sdi(sbuf->str());
-		lz.Decode(&sdi,&sdo);
 
-		fge::log_debug("aaaaaaaaaaaaaaaaaaa");
-		fge::log_debug("ccccccccccccccccccc");
-		fge::CLog log("logtest.txt");
-		log.SetDisplaySeverity(1);
-		log.Debug("bbbbbbbbbbbbbbbbbbbbbbb");
-		log.Error("eeeeeeeeeeeeeeeeeeeeeeeeee");
-		log.WirteBinFile("test.lzd",sdo.str().c_str(),sdo.str().length());
+#include <crtdbg.h>
+	//¼ì²âÄÚ´æÐ¹Â©
+#if defined(WIN32) && defined(_DEBUG) 
+	int tmpDbgFlag;
+
+	tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+	tmpDbgFlag |= _CRTDBG_DELAY_FREE_MEM_DF;
+	tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
+	_CrtSetDbgFlag(tmpDbgFlag);			//ÉèÖÃÄÚ´æÐ¹Â©¸ú×Ù±êÖ¾
+#endif //WIN32 & _DEBUG
+
+	CClockManager clockMgr;
+	Test t;
+	clockMgr.SetClock(0,1000*5,1,CTimeEvent(&t,&Test::OnTimer));
+	clockMgr.SetClock(0,1000,1000,CTimeEvent(&t,&Test::OnTimer1));
+
+	DWORD c = clock();
+	while( t.n < 10 )
+	{
+		clockMgr.Update();
+		Sleep(10);
 	}
+	system("pause");
 	return 0;
 }
 
