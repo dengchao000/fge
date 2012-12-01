@@ -240,6 +240,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Include\fgeList.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\fgeCore\fgeLog.cpp"
 				>
 			</File>

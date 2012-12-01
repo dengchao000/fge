@@ -17,20 +17,23 @@
 #define nil 0
 using namespace fge;
 
+HCLOCK hc;
 struct Test : public fge::SharedObject
 {
 	void OnTimer( )
 	{
-		printf("OnTimer");
+		printf("OnTimer\n");
+		INSTANCE(CClockManager)->ModifyClcok( hc,500,10 );
 	}
-	void OnTimer1( )
-	{
-		static int n = 1;
-		printf("OnTimer %d\n",n++);
-		this->n = n;
-	}
+
 	int n;
 };
+void OnTimer1( )
+{
+	static int n = 1;
+	printf("OnTimer %d\n",n++);
+
+}
 int _tmain(int argc, _TCHAR* argv[])
 {
 
@@ -45,15 +48,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	_CrtSetDbgFlag(tmpDbgFlag);			//设置内存泄漏跟踪标志
 #endif //WIN32 & _DEBUG
 
-	CClockManager clockMgr;
+	CClockManager* clockMgr = INSTANCE(CClockManager);
 	Test t;
-	clockMgr.SetClock(0,1000*5,1,CTimeEvent(&t,&Test::OnTimer));
-	clockMgr.SetClock(0,1000,1000,CTimeEvent(&t,&Test::OnTimer1));
+	clockMgr->SetClock(0,1000*5,1,CTimeEvent(&t,&Test::OnTimer));
+	hc = clockMgr->SetClock(0,1000,1000,CTimeEvent(&OnTimer1));
 
 	DWORD c = clock();
-	while( t.n < 10 )
+	while( clockMgr->Update() )
 	{
-		clockMgr.Update();
 		Sleep(10);
 	}
 	system("pause");

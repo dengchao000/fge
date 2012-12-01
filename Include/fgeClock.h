@@ -51,6 +51,7 @@
 #include <map>
 #include <strstream>
 #include "fgeMinHeap.h"
+#include "fgeList.h"
 
 namespace fge{
 	//#include <mmsystem.h>
@@ -118,6 +119,40 @@ namespace fge{
 			}
 		}
 	};
+	class FTimeEvent: public ITimeEvent
+	{
+	public:
+		typedef void (*Handle)( );
+	private:
+		Handle mHandle;
+		Handle mCancel;
+	public:
+		/**
+		* 构造函数,注册事件响应函数.
+		*/
+		FTimeEvent(Handle handle)
+		{ 
+			mHandle = handle;
+			mCancel = 0;
+		}
+		FTimeEvent(Handle handle, Handle cancel)
+		{ 
+			mHandle = handle;
+			mCancel = cancel;
+		}
+		virtual void ReleaseTimeEvent( ){ delete this ;}
+		virtual void OnTimeOut(unsigned timerid)
+		{
+			if(mHandle)
+				mHandle( );
+		}
+		virtual void OnCancel( unsigned timerid )
+		{
+			if(mCancel)
+				mCancel( );
+		}
+	};
+
 	template<typename T>
 	ITimeEvent* CTimeEvent( T* pObj, void (T::*handle)( ) )
 	{
@@ -127,6 +162,15 @@ namespace fge{
 	ITimeEvent* CTimeEvent( T* pObj, void (T::*handle)( ), void (T::*cancel)( ) )
 	{
 		return new DTimeEvent<T>(pObj,handle,cancel);
+	}
+	
+	inline ITimeEvent* CTimeEvent( void (*handle)( ) )
+	{
+		return new FTimeEvent(handle);
+	}
+	inline ITimeEvent* CTimeEvent( void (*handle)( ), void (*cancel)( ) )
+	{
+		return new FTimeEvent(handle,cancel);
 	}
 	/**
 	* 一个简单的计时器
@@ -172,12 +216,8 @@ namespace fge{
 		int 		flag;
 		
 		bool operator> (SClock& r) { return timer.OverTime()>r.timer.OverTime(); }
-		SClock( ){
-			callback = 0;
-		}
-		~SClock(){
-			if(callback) callback->ReleaseTimeEvent( ); callback = 0;
-		}
+		SClock( ){callback = 0;}
+		~SClock(){if(callback) callback->ReleaseTimeEvent( ); callback = 0;}
 	};
 	typedef fge::SharedPtr<SClock> HCLOCK;
 	class CClock
@@ -210,11 +250,19 @@ namespace fge{
 
 		int		TestTime(HCLOCK& hclock);
 		int		PassTime(HCLOCK& hclock);
-
+	
 	private:		
 		typedef min_heap_t<SClock> TimeQueue;
-
-		TimeQueue			m_clockList;
+		//struct ClockBuf
+		//{
+		//	SClock*		data;
+		//	ClockBuf*	next;
+		//	void init( ){ data=0; next=0; }
+		//	static void dctor(ClockBuf* node);
+		//};
+		TimeQueue m_clockList;
+		//ClockBuf* m_reloadClock;
+		//ClockBuf* m_nodeBuf;
 	};
 	typedef CClock CClockManager;
 }

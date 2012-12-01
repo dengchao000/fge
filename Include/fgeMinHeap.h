@@ -51,9 +51,9 @@ namespace fge
 				to be less than the parent, it can't need to shift both up and
 				down. */
 				if (e->min_heap_idx > 0 && elem_greater(p[parent], last))
-					shift_up_(s, e->min_heap_idx, last);
+					shift_up_(e->min_heap_idx, last);
 				else
-					shift_down_(s, e->min_heap_idx, last);
+					shift_down_(e->min_heap_idx, last);
 				e->min_heap_idx = -1;
 				return 0;
 			}
