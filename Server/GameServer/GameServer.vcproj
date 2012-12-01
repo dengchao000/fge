@@ -223,6 +223,62 @@
 		<Filter
 			Name="Net"
 			>
+			<File
+				RelativePath="..\..\fgeNet\ActiveObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\ActiveObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\ConnectionManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\ConnectionManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\DNS.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\oclFrameProtocol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\oclMsg.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\oclProtocol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\oclSocket.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\oclSocket.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\tcpClient.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\tcpClient.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\tcpServer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeNet\tcpServer.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Fge"
@@ -233,6 +289,10 @@
 			</File>
 			<File
 				RelativePath="..\..\Include\fgeClock.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeEvent.h"
 				>
 			</File>
 			<File
@@ -263,6 +323,30 @@
 				RelativePath="..\..\Include\fgeMinHeap.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\Include\fgeSharedObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeSingleton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeStti.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgeThread.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeThread.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeUtil.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Script"
@@ -271,6 +355,38 @@
 		<Filter
 			Name="Game"
 			>
+		</Filter>
+		<Filter
+			Name="Mem"
+			>
+			<File
+				RelativePath="..\..\fgeCore\fgeFreeList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeFreeList.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeMemAllotor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgeMemoryObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeMemoryObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgeMemoryPool.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeMemoryPool.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"

@@ -50,7 +50,6 @@ namespace fge
 		virtual ~CThread(void);
 
 		bool			StartThread(bool bRunAtOnce = true);//启动线程 bRunAtOnce : 立即执行?	
-		bool			StartThread(unsigned ( __stdcall *start_address )( void * ),void* param, bool bRunAtOnce = true);
 		void			WaitForCompletion();				//等待线程结束		
 		void			SetPriority(ThreadPriority priority);//设置优先级		
 		void			Suspend();							//挂起		
@@ -58,6 +57,8 @@ namespace fge
 
 		virtual void	Close();							//
 		unsigned int	GetID()		{ return m_id; }
+	public:
+		static HANDLE	StartThread(unsigned ( __stdcall *start_address )( void * ),void* param, bool bRunAtOnce = true);
 	protected:		
 		virtual void	ThreadProc();						//线程函数
 		virtual void	ClearThreadRes();					//清理线程资源

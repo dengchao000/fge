@@ -1,7 +1,7 @@
 #include "StdAfx.h"
-#include "fgethread.h"
+#include "fgeThread.h"
 #include <process.h>
-
+#include <fgeException.h>
 using namespace fge;
 CThread::CThread(void)
 {
@@ -70,16 +70,14 @@ bool	CThread::StartThread(bool bRunAtOnce)
 	}
 	return false;
 }
-bool	CThread::StartThread(unsigned ( __stdcall *start_address )( void * ), void* param, bool bRunAtOnce/* = true*/)
+HANDLE	CThread::StartThread(unsigned ( __stdcall *start_address )( void * ), void* param, bool bRunAtOnce/* = true*/)
 {
-	if(m_hThread == NULL)
-	{
-		unsigned int f;
-		bRunAtOnce? f=0: f = CREATE_SUSPENDED;		
-		m_hThread = (HANDLE)_beginthreadex(NULL,0,start_address,reinterpret_cast<LPVOID>(param),f,&m_id);
-		return true;
-	}
-	return false;
+	HANDLE hThread = NULL;
+	unsigned int threadid;
+	unsigned int f;
+	bRunAtOnce? f=0: f = CREATE_SUSPENDED;		
+	hThread = (HANDLE)_beginthreadex(NULL,0,start_address,reinterpret_cast<LPVOID>(param),f,&threadid);
+	return hThread;
 }
 void	CThread::ThreadProc()
 {

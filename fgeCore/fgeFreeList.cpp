@@ -3,7 +3,6 @@
 #include "fgelog.h"
 namespace fge
 {
-
 	FreeList::FreeList(size_t _size)
 		:Size((int)_size)
 	{
@@ -37,7 +36,7 @@ namespace fge
 			NodeList.pNext = pblock->pNext;
 			if(!pblock->pMemory)
 				//throw MemLeakException("内存池中的内存未完全回收");
-				CLog::Write("内存池中的内存块未完全回收 Size=%d",Size);
+				fge::log_warn("内存池中的内存块未完全回收 Size=%d",Size);
 			pblock->pMemory = 0;
 			delete pblock;
 			pblock = NodeList.pNext;
@@ -117,7 +116,7 @@ namespace fge
 			if(pnd == 0)
 			{
 				//throw MemOverException("可能误将内存以外的回收到池中了");
-				CLog::Write("可能误将内存以外的回收到池中了");
+				fge::log_warn("可能误将内存以外的回收到池中了");
 				return false;
 			}	
 			else
