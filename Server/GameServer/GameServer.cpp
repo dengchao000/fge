@@ -11,33 +11,23 @@
 #include <deque>
 #include <functional>
 #include <vector>
-
+#include <crtdbg.h>
 #include "fgeClock.h"
+#include "tcpServer.h"
 
 #define nil 0
 using namespace fge;
 
-HCLOCK hc;
-struct Test : public fge::SharedObject
+class ServerApp
 {
-	void OnTimer( )
+public:
+	void Init( )
 	{
-		printf("OnTimer\n");
-		INSTANCE(CClockManager)->ModifyClcok( hc,500,10 );
+		INSTANCE(CClockManager);
 	}
-
-	int n;
 };
-void OnTimer1( )
-{
-	static int n = 1;
-	printf("OnTimer %d\n",n++);
-
-}
 int _tmain(int argc, _TCHAR* argv[])
 {
-
-#include <crtdbg.h>
 	//¼ì²âÄÚ´æÐ¹Â©
 #if defined(WIN32) && defined(_DEBUG) 
 	int tmpDbgFlag;
@@ -48,17 +38,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	_CrtSetDbgFlag(tmpDbgFlag);			//ÉèÖÃÄÚ´æÐ¹Â©¸ú×Ù±êÖ¾
 #endif //WIN32 & _DEBUG
 
+	//
 	CClockManager* clockMgr = INSTANCE(CClockManager);
-	Test t;
-	clockMgr->SetClock(0,1000*5,1,CTimeEvent(&t,&Test::OnTimer));
-	hc = clockMgr->SetClock(0,1000,1000,CTimeEvent(&OnTimer1));
-
-	DWORD c = clock();
+	TcpServer* pNet = new TcpServer();
+	pNet->Open("127.0.0.1",port,0);
 	while( clockMgr->Update() )
 	{
 		Sleep(10);
 	}
-	system("pause");
+	
+
 	return 0;
 }
 

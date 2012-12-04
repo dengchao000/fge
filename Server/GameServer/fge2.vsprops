@@ -6,7 +6,7 @@
 	>
 	<Tool
 		Name="VCCLCompilerTool"
-		AdditionalIncludeDirectories="C:\MyProject\GitHub\fge2.6.0\Include"
+		AdditionalIncludeDirectories="C:\MyProject\GitHub\fge2.6.0\Include;C:\MyProject\GitHub\fge2.6.0\fgeNet"
 	/>
 	<Tool
 		Name="VCLinkerTool"

@@ -9,8 +9,7 @@
 
 
 #pragma once
-#include <fgeutil.h>
-#include <fgeplugin.h>
+#include <fgePlugin.h>
 namespace fge
 {
 class CPluginManager

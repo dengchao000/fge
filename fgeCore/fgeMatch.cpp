@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "fgematch.h"
+#include "fgeMatch.h"
 
 namespace fge
 {

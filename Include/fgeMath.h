@@ -16,6 +16,10 @@
 #include "fgeutil.h"
 namespace fge
 {
+	class  Point
+	{ 
+		real x,y;
+	};
 	class  Math
 	{
 	public:
@@ -38,7 +42,7 @@ namespace fge
 		real	x,y;
 
 		fgeVector(real _x, real _y)	{ x=_x; y=_y; }
-		fgeVector()						{ x=0; y=0; }
+		fgeVector()	{ x=0; y=0; }
 
 		fgeVector	operator- (const fgeVector &v) { return fgeVector(x-v.x, y-v.y); }
 		fgeVector	operator+ (const fgeVector &v) { return fgeVector(x+v.x, y+v.y); }

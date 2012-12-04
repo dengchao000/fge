@@ -8,7 +8,7 @@
 */
 
 #pragma once
-#include <fgeutil.h>
+#include <fgeUtil.h>
 
 namespace fge
 {

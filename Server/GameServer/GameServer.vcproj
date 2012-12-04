@@ -219,6 +219,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\server.cfg"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Net"
@@ -320,7 +324,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\fgeCore\fgeMatch.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeMath.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Include\fgeMinHeap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgePlugin.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgePluginManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgePluginManager.h"
 				>
 			</File>
 			<File
@@ -347,6 +371,18 @@
 				RelativePath="..\..\Include\fgeUtil.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgeXML.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\fgeXML.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\fgeCore\fgeXSL.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Script"
@@ -355,6 +391,10 @@
 		<Filter
 			Name="Game"
 			>
+			<File
+				RelativePath=".\GameObject.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Mem"
@@ -387,6 +427,10 @@
 				RelativePath="..\..\Include\fgeMemoryPool.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Task"
+			>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
