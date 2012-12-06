@@ -6,11 +6,11 @@ using namespace fge;
 S_CMDINFO::S_CMDINFO(char* szCmdName,char* szCmdHelp,CmdEvent::Event* cmdEvent)
 {
 	if(szCmdName)
-		strcpy(this->szCmdName,szCmdName);
+		strcpy_s(this->szCmdName,szCmdName);
 	else
 		szCmdName[0] = '\0';
 	if(szCmdHelp)
-		strcpy(this->szCmdHelp,szCmdHelp);
+		strcpy_s(this->szCmdHelp,szCmdHelp);
 	else
 		szCmdHelp[0] = '\0';
 	if(cmdEvent)
@@ -39,7 +39,7 @@ CCmdInterface::CCmdInterface(void)
 		m_args.argv[i] = new char[CMD_LEN+1]; 
 		m_args.argv[i][CMD_LEN] = '\0';
 	}
-	strcpy(m_name,"Server");
+	strcpy_s(m_name,"Server");
 }
 
 CCmdInterface::~CCmdInterface(void)
@@ -79,12 +79,12 @@ void	CCmdInterface::AddCommand(char* szCmdName, char *szCmdHelp,CmdEvent::Event*
 	if(m_icmdcount_param<CMDCOUNT)
 	{
 		if(szCmdName)
-			strcpy(m_cmdparam[m_icmdcount_param].szCmdName,szCmdName);
+			strcpy_s(m_cmdparam[m_icmdcount_param].szCmdName,szCmdName);
 		else
 			m_cmdparam[m_icmdcount_param].szCmdName[0] = '\0';
 
 		if(szCmdHelp)
-			strcpy(m_cmdparam[m_icmdcount_param].szCmdHelp,szCmdHelp);
+			strcpy_s(m_cmdparam[m_icmdcount_param].szCmdHelp,szCmdHelp);
 		else
 			m_cmdparam[m_icmdcount_param].szCmdHelp[0] = '\0';
 
@@ -177,7 +177,7 @@ void	CCmdInterface::Run()
 		m_runLock.Leave();
 		ZeroMemory(cmd,80);	
 		std::cout <<m_name<<">:";
-		gets(cmd);									//获取命令行
+		gets_s(cmd);									//获取命令行
 
 		bAnalyze = false;
 		std::list<Listener*>::iterator i = m_cmdListener.begin();
@@ -216,7 +216,7 @@ void	CCmdInterface::Run()
 	m_runLock.Leave();
 	OnShutdown( );
 }
-void	CCmdInterface::Run(int argc, _TCHAR* argv[])
+void	CCmdInterface::Run(int argc, char* argv[])
 {
 	S_CMDINFO * pCmdInfo = NULL;
 	if(argc>1)
@@ -259,7 +259,7 @@ void	CCmdInterface::Help(CmdArgs* pPargs)
 ************************************************/
 void	CCmdInterface::SetName(char* name)
 {
-	strcpy(m_name,name);
+	strcpy_s(m_name,name);
 }
 /************************************************
 功能:	Quit命令处理函数

@@ -18,7 +18,7 @@ namespace fge
 	};
 	TAG::TAG(const char* szTagName,PARSE func)
 	{
-		strcpy(name,szTagName);
+		strcpy_s(name,szTagName);
 		parseFun = func;
 	};
 	TAG::TAG(const TAG& t)
@@ -214,7 +214,7 @@ namespace fge
 			{
 				xml+=strlen("[[data");
 				m_pcr->bDataValue = *xml;
-				sprintf(szBuf,"%cdata]]",*xml++);
+				sprintf_s(szBuf,"%cdata]]",*xml++);
 				//xmlNext = Find(xml," data]]");
 				xmlNext = Find(xml,szBuf);
 				xmlRet = xmlNext + strlen("[[data ");
@@ -429,7 +429,7 @@ namespace fge
 				SYSTEMTIME sysTime;
 				GetLocalTime(&sysTime);
 				char _name[256];
-				sprintf( _name,"%s_%d_%d_%d_.txt","xml_exception",sysTime.wHour,sysTime.wSecond,sysTime.wMinute );
+				sprintf_s( _name,"%s_%d_%d_%d_.txt","xml_exception",sysTime.wHour,sysTime.wSecond,sysTime.wMinute );
 				file_dump.open(_name,std::ios::out);
 				if(file_dump.is_open())
 					file_dump.write(xmlText,(std::streamsize)strlen(xmlText));			
@@ -879,7 +879,7 @@ namespace fge
 	}
 	const char* Element::GetAttribute(const char* name)
 	{
-		int hash = fge::StrHash( name );
+		int hash = fge::strHash( name );
 		std::list<Attribute>::iterator i=attrib.begin();
 		while(i!=attrib.end())
 		{
@@ -1107,7 +1107,7 @@ namespace fge
 	//
 	bool Element::SetAttribute(const char* name, const char* value)
 	{
-		int nameid = fge::StrHash( name );
+		int nameid = fge::strHash( name );
 		std::list<Attribute>::iterator i=attrib.begin();
 		while(i!=attrib.end())
 		{

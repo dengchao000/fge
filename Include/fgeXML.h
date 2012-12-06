@@ -64,13 +64,13 @@ namespace fge
 		Attribute() { hash=0; }
 		Attribute( const char* _name, const char* _value ){
 			name = _name;value = _value;
-			hash = fge::StrHash( _name );
+			hash = fge::strHash( _name );
 		}
 		Attribute( const  std::string _name, const  std::string _value ){
 			name = _name;value = _value;
-			hash = fge::StrHash( _name.c_str() );
+			hash = fge::strHash( _name.c_str() );
 		}
-		void	SetName( const char* _name )	{name = _name;	hash = fge::StrHash( _name );}
+		void	SetName( const char* _name )	{name = _name;	hash = fge::strHash( _name );}
 		void	SetValue( const char* _value )	{	value = _value;	}
 
 		const std::string& GetName( )	{ return name; }

@@ -21,7 +21,7 @@ unsigned int CThread::Run(LPVOID	lpParam)
 	if(pThread)
 	{
 		try{
-			pThread->m_bRun = true;
+			::InterlockedExchange(&pThread->m_bRun,1);
 			pThread->ThreadProc();
 		}
 		catch(std::exception e)
@@ -85,5 +85,5 @@ void	CThread::ThreadProc()
 }
 void	CThread::Close()
 {
-	m_bRun = false;
+	::InterlockedExchange(&m_bRun,0);
 }

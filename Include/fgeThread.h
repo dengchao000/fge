@@ -68,7 +68,7 @@ namespace fge
 	protected:
 		HANDLE			m_hThread;		//线程句柄
 		unsigned int	m_id;			//线程 ID 号
-		bool			m_bRun;			//线程运行标志.可以在CThreadProc中测试这个标志,如果为false则可以退出线程
+		long			m_bRun;			//线程运行标志.可以在CThreadProc中测试这个标志,如果为false则可以退出线程
 		CCriticalSection m_cs;			//临界区	
 	};
 

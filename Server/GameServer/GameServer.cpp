@@ -13,18 +13,67 @@
 #include <vector>
 #include <crtdbg.h>
 #include "fgeClock.h"
-#include "tcpServer.h"
+#include "Net/NetMsg.h"
+#include "GameObject.h"
 
 #define nil 0
 using namespace fge;
-
-class ServerApp
+using namespace ocl;
+class ServerApp : public fge::CThread
 {
 public:
 	void Init( )
 	{
 		INSTANCE(CClockManager);
 	}
+
+	//初始化
+	virtual void	OnInstall(){ m_msgQueue.Init(10000,0); }	
+	//关闭
+	virtual void	OnUninstall(){ m_plugMag.UninstallPlugin(); m_msgQueue.Clear(); }
+	//更新
+	virtual void	Update()	{ m_plugMag.Update(); }
+	//消息处理
+	virtual UINT	MsgProc(UINT message, WPARAM wParam, LPARAM lParam )
+	{
+		return m_plugMag.MsgProc(message,wParam,lParam);
+	}
+
+
+	//安装插件
+	void	InstallPlugin(CPlugin* plugin){ m_plugMag.InstallPlugin(plugin); }
+	//卸载插件
+	void	UninstallPlugin(CPlugin* plugin){ m_plugMag.UninstallPlugin(plugin); }
+	//插入消息
+	bool	Push(DWORD msg, BYTE* wParam,size_t wParamSize, BYTE* lParam,size_t lParamSize);
+	//插入消息到最前(优先处理)
+	bool	PushFront(DWORD msg, BYTE* wParam,size_t wParamSize, BYTE* lParam,size_t lParamSize);
+	//插入消息
+	bool	Push(DWORD msg, DWORD wParam,DWORD lParam );
+	//插入消息到最前(优先处理)
+	bool	PushFront(DWORD msg, DWORD wParam,DWORD lParam );
+
+	fge::CMessageManager*	GetMessageQueue(){ return &m_msgQueue; }
+
+protected:		
+	fge::CMessageManager	m_msgQueue;	// 消息队列.
+	fge::CPluginManager     m_plugMag;	// 插件管理
+protected:
+	virtual void	ThreadProc()
+	{//线程函数
+		CClockManager* clockMgr = INSTANCE(CClockManager);
+		
+		while( m_bRun )
+		{
+			clockMgr->Update();
+			Sleep(10);
+		}
+		clockMgr->Destroy();
+	}
+};
+void GmListener::OnRecv( const char* body, u_long size, ocl::ConnectionID id )
+{
+	log_debug("OnRecv gm[%d]: %s %d", id.nID,body,size);
 };
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -40,13 +89,28 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//
 	CClockManager* clockMgr = INSTANCE(CClockManager);
-	TcpServer* pNet = new TcpServer();
-	pNet->Open("127.0.0.1",port,0);
-	while( clockMgr->Update() )
-	{
-		Sleep(10);
-	}
+	MoveManager* moveMgr = INSTANCE(MoveManager);
+
+	TcpServer* pNetClient = new TcpServer();
+	pNetClient->AddListener(new ClientListener());
+	pNetClient->Open("192.168.0.207",7117,0);
+
+	TcpServer* pNetGm = new TcpServer();
+	pNetGm->AddListener(new GmListener());
+	pNetGm->Open("192.168.0.207",7118,0);
+
+	TcpClient *pNetLogin = new TcpClient();
+	pNetLogin->AddListener(new LoginListener());
+	pNetLogin->Open("192.168.0.207",7116);
+
+	ServerApp app;
+	app.StartThread();
+
+	pNetClient->Close();
+	pNetLogin->Close();
 	
+	SAFE_DELETE( pNetClient );
+	SAFE_DELETE( pNetLogin );
 
 	return 0;
 }

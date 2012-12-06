@@ -154,7 +154,7 @@ const char* _ParseCmd( const char* as, Element& rt, int x=0 )
 				else{
 					attribID++;
 					char szNameBuf[64];
-					sprintf(szNameBuf,"[%d]",attribID);
+					sprintf_s(szNameBuf,"[%d]",attribID);
 					rt.attrib.push_back(Attribute(szNameBuf,buf));
 				}
 				return pstr;
@@ -165,7 +165,7 @@ const char* _ParseCmd( const char* as, Element& rt, int x=0 )
 				else{					
 					attribID++;
 					char szNameBuf[64];
-					sprintf(szNameBuf,"[%d]",attribID);
+					sprintf_s(szNameBuf,"[%d]",attribID);
 					rt.attrib.push_back(Attribute(szNameBuf,buf));
 				}
 			}
@@ -202,7 +202,7 @@ bool CXML::ParseSXL( const char* xmlText )
 	}
 	catch( std::exception & e )
 	{
-		CLog::Write(e.what());
+		log_error(e.what());
 		return false;
 	}
 	//m_root.AddSubElement(root);

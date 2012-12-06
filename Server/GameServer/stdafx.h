@@ -12,3 +12,11 @@
 
 #include <winsock2.h>
 #include <windows.h>
+
+#include "fgeUtil.h"
+#include "fgeSharedObject.h"
+#include "fgeMath.h"
+#include "fgeList.h"
+
+#include "Typedef\PlayerDef.h"
+using namespace fge;

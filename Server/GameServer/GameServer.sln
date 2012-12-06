@@ -2,6 +2,16 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameServer", "GameServer.vcproj", "{252992FA-D1A4-4B9A-89A4-2001EC572D5B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1723940C-F9F9-4F59-8E61-2E6097939F9A} = {1723940C-F9F9-4F59-8E61-2E6097939F9A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "fgeCore", "..\..\fgeCore\fgeCore\fgeCore.vcproj", "{1723940C-F9F9-4F59-8E61-2E6097939F9A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClient", "..\..\Test\TestClient\TestClient.vcproj", "{4110C8F8-0D86-488A-8350-1AE5291106BB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1723940C-F9F9-4F59-8E61-2E6097939F9A} = {1723940C-F9F9-4F59-8E61-2E6097939F9A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +23,14 @@ Global
 		{252992FA-D1A4-4B9A-89A4-2001EC572D5B}.Debug|Win32.Build.0 = Debug|Win32
 		{252992FA-D1A4-4B9A-89A4-2001EC572D5B}.Release|Win32.ActiveCfg = Release|Win32
 		{252992FA-D1A4-4B9A-89A4-2001EC572D5B}.Release|Win32.Build.0 = Release|Win32
+		{1723940C-F9F9-4F59-8E61-2E6097939F9A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1723940C-F9F9-4F59-8E61-2E6097939F9A}.Debug|Win32.Build.0 = Debug|Win32
+		{1723940C-F9F9-4F59-8E61-2E6097939F9A}.Release|Win32.ActiveCfg = Release|Win32
+		{1723940C-F9F9-4F59-8E61-2E6097939F9A}.Release|Win32.Build.0 = Release|Win32
+		{4110C8F8-0D86-488A-8350-1AE5291106BB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4110C8F8-0D86-488A-8350-1AE5291106BB}.Debug|Win32.Build.0 = Debug|Win32
+		{4110C8F8-0D86-488A-8350-1AE5291106BB}.Release|Win32.ActiveCfg = Release|Win32
+		{4110C8F8-0D86-488A-8350-1AE5291106BB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

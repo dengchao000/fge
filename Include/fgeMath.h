@@ -16,8 +16,10 @@
 #include "fgeutil.h"
 namespace fge
 {
-	class  Point
+	struct Point
 	{ 
+		Point(){ x =y = 0.0f; }
+		Point(real _x, real _y ){ x=_x; y=_y; }
 		real x,y;
 	};
 	class  Math
@@ -36,35 +38,35 @@ namespace fge
 	*/
 	float InvSqrt(float x);
 
-	class  fgeVector
+	class  Vector2
 	{
 	public:
 		real	x,y;
 
-		fgeVector(real _x, real _y)	{ x=_x; y=_y; }
-		fgeVector()	{ x=0; y=0; }
+		Vector2(real _x, real _y)	{ x=_x; y=_y; }
+		Vector2()	{ x=0; y=0; }
 
-		fgeVector	operator- (const fgeVector &v) { return fgeVector(x-v.x, y-v.y); }
-		fgeVector	operator+ (const fgeVector &v) { return fgeVector(x+v.x, y+v.y); }
-		fgeVector	operator* (real scalar) { return fgeVector(x*scalar, y*scalar); }
-		fgeVector&	operator-= (const fgeVector &v) { x-=v.x; y-=v.y; return *this; }
-		fgeVector&	operator+= (const fgeVector &v) { x+=v.x; y+=v.y; return *this; }
-		fgeVector&	operator*= (real scalar) { x*=scalar; y*=scalar; return *this; }
-		fgeVector	operator- () { return fgeVector(-x, -y); }
-		bool		operator== (const fgeVector &v) { return (x==v.x && y==v.y); }
-		bool		operator!= (const fgeVector &v) { return (x!=v.x || y!=v.y); }
+		Vector2		operator- (const Vector2 &v) { return Vector2(x-v.x, y-v.y); }
+		Vector2		operator+ (const Vector2 &v) { return Vector2(x+v.x, y+v.y); }
+		Vector2		operator* (real scalar) { return Vector2(x*scalar, y*scalar); }
+		Vector2&	operator-= (const Vector2 &v) { x-=v.x; y-=v.y; return *this; }
+		Vector2&	operator+= (const Vector2 &v) { x+=v.x; y+=v.y; return *this; }
+		Vector2&	operator*= (real scalar) { x*=scalar; y*=scalar; return *this; }
+		Vector2		operator- () { return Vector2(-x, -y); }
+		bool		operator== (const Vector2 &v) { return (x==v.x && y==v.y); }
+		bool		operator!= (const Vector2 &v) { return (x!=v.x || y!=v.y); }
 
-		real		Dot(const fgeVector *v) const { return x*v->x + y*v->y; }
-		fgeVector*	Normalize() { real rc=InvSqrt(Dot(this)); x*=rc; y*=rc; return this; }
+		real		Dot(const Vector2 *v) const { return x*v->x + y*v->y; }
+		Vector2*	Normalize() { real rc=InvSqrt(Dot(this)); x*=rc; y*=rc; return this; }
 		real		Length() const { return sqrt(Dot(this)); }
-		real		Angle(const fgeVector *v = 0) const;
-		fgeVector*	Rotate(real a);
+		real		Angle(const Vector2 *v = 0) const;
+		Vector2*	Rotate(real a);
 	};
 
-	inline fgeVector operator* (const fgeVector &v, real s) { return fgeVector(s*v.x, s*v.y); }
-	inline fgeVector operator* (real s, const fgeVector &v) { return fgeVector(s*v.x, s*v.y); }
-	inline real operator^ (const fgeVector &v, const fgeVector &u) { return v.Angle(&u); }
-	inline real operator% (const fgeVector &v, const fgeVector &u) { return v.Dot(&u); }
+	inline Vector2 operator* (const Vector2 &v, real s) { return Vector2(s*v.x, s*v.y); }
+	inline Vector2 operator* (real s, const Vector2 &v) { return Vector2(s*v.x, s*v.y); }
+	inline real operator^ (const Vector2 &v, const Vector2 &u) { return v.Angle(&u); }
+	inline real operator% (const Vector2 &v, const Vector2 &u) { return v.Dot(&u); }
 
 
 	////Random

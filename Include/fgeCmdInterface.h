@@ -20,8 +20,8 @@
 #include <windows.h>
 #include <iostream>
 #include <list>
-#include <fgeutil.h>
-#include <fgedelegate.h>
+#include <fgeUtil.h>
+#include <fgeDelegate.h>
 #include <fgeThread.h>
 
 namespace fge{
@@ -54,7 +54,7 @@ namespace fge{
 	};
 
 	//用户界面基类
-	class CCmdInterface : public IConsign, public SharedObject
+	class CCmdInterface : public SharedObject
 	{
 	public:
 		class Listener
@@ -68,7 +68,7 @@ namespace fge{
 		CCmdInterface(void);
 		virtual ~CCmdInterface(void);
 		virtual void	Run();
-		virtual void	Run(int argc, _TCHAR* argv[]);
+		virtual void	Run(int argc, char* argv[]);
 		void	SetName(char* name);
 		void	SetListener( Listener* pListener ){ m_cmdListener.push_back( pListener ); }
 

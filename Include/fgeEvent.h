@@ -7,7 +7,7 @@
 #pragma once
 #include <list>
 #include <functional>
-
+namespace fge{
 #ifndef INVOKE
 #define INVOKE(THIS,FUN) (THIS->*FUN)
 #endif
@@ -590,3 +590,4 @@ public:
 private:
 	std::list<TEvent*> mEventList;
 };
+}

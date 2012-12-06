@@ -39,7 +39,7 @@ public:
 		
 		struct hostent *remoteHost;
 
-		sprintf(szError,"Calling gethostbyname with %s\n", host_name);
+		sprintf_s(szError,"Calling gethostbyname with %s\n", host_name);
 		remoteHost = gethostbyname(host_name);
 
 		if (remoteHost == NULL) {
@@ -52,7 +52,7 @@ public:
 					OutputDebugStr("No data record found\n");
 					return strIP;
 				} else {
-					sprintf(szError,"Function failed with error: %ld\n", dwError);
+					sprintf_s(szError,"Function failed with error: %ld\n", dwError);
 					OutputDebugStr(szError);
 					return strIP;
 				}
@@ -66,7 +66,7 @@ public:
 			{
 				while (remoteHost->h_addr_list[i] != 0) {
 					addr.s_addr = *(u_long *) remoteHost->h_addr_list[i++];
-					sprintf(szError,"\tIP Address #%d: %s\n", i, inet_ntoa(addr));
+					sprintf_s(szError,"\tIP Address #%d: %s\n", i, inet_ntoa(addr));
 					OutputDebugStr(szError);
 					strIP = inet_ntoa(addr);
 					break;
