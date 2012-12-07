@@ -1,7 +1,7 @@
 /*
 *  作者  :	邓超
 *  QQ    :	23427470
-*  Mail	 :  sen.night@hotmail.com
+*  Mail	 :  dengchao000@gmail.com
 *  时间  :	2007-11-6
 *
 *  Fly Game 2

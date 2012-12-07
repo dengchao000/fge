@@ -2,7 +2,7 @@
 *
 ** Author:	µË³¬
 ** QQ:		23427470
-** Mail:    sen.night@hotmail.com
+** Mail:    dengchao000@gmail.com
 ** Time:	2007/12/30
 *
 ** Fly Game 2 [ Sparrow ]
