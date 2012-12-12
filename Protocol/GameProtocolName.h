@@ -30,7 +30,7 @@ namespace protocol_name
 		NET_CONNECTED,			//连接
 		NET_DISCONNECTED,		//断开
 		NET_PULSE,				//断线检测
-	}
+	};
 	enum
 	{//----------服务器消息-------------
 		SERVER_BEGIN = NET_MSG,
@@ -38,12 +38,12 @@ namespace protocol_name
 		SERVER_UPDATE,
 		SERVER_SHUTDOWN,
 		SERVER_GETINFO,
-	}
+	};
 	enum
 	{//----------GM消息-------------
 		GMMSG_BEGIN = NET_MSG,
 		GMMSG_CLOSESERVER,		//关闭服务器
-	}
+	};
 	enum
 	{//----------脚本消息-------------
 		SCRIPT_BEGIN = SCRIPT_MSG,

@@ -49,7 +49,7 @@ namespace fge{
 		virtual ~TemplateFactory(void){}
 	public:
 
-		virtual bool Register(T* pComponent, const String& classid)
+		virtual bool Register(T* pComponent, const string& classid)
 		{
 			int _id = fge::StrHash(classid);
 			_Product cmp = {_id, pComponent};
@@ -62,7 +62,7 @@ namespace fge{
 			mComponents.push_back(cmp);
 			return true;
 		}
-		virtual T* CreateComponent(const String& classid)
+		virtual T* CreateComponent(const string& classid)
 		{
 			int _id = fge::StrHash(classid);
 			std::list<_Product>::iterator i = mComponents.begin();
@@ -77,7 +77,7 @@ namespace fge{
 
 	protected:
 		struct _Product{
-			//String name;
+			//string name;
 			int id;
 			T*  pcm;			
 		};
@@ -90,7 +90,7 @@ namespace fge{
 	class TRegister
 	{
 	private:
-		TRegister( T& v, const String& name )
+		TRegister( T& v, const string& name )
 		{	
 			std::cout<<TEXT("注册类型:")<<name.c_str()<<std::endl; 
 			INSTANCE(FactoryType)->Register(&v,name);
@@ -101,7 +101,7 @@ namespace fge{
 			INSTANCE(FactoryType)->Register(&v,id);
 		}
 	public:
-		inline static void Register(T& v, const String& name)
+		inline static void Register(T& v, const string& name)
 		{
 			static TRegister i(v,name);
 		}
@@ -137,7 +137,7 @@ namespace fge{
 		virtual ~Mould( ){ };
 		virtual T*				CreateObject() = 0;
 		virtual int				GetTypeID() = 0;
-		virtual const String&	GetName() = 0;		
+		virtual const string&	GetName() = 0;		
 	};
 
 	//抽象工厂类
@@ -159,16 +159,16 @@ namespace fge{
 		{
 		public:
 			ImplMould( ){ id = -1; }
-			ImplMould( const String& _name ){ id = fge::StrHash(_name); name = _name; }
+			ImplMould( const string& _name ){ id = fge::StrHash(_name); name = _name; }
 			ImplMould( int _id ){ this->id = _id;	}
 			virtual ~ImplMould( ){ };
 
 			virtual T*				CreateObject( ){ return new ImplType();}			
 			virtual int				GetTypeID( ){ return id; }
-			virtual const String&	GetName( ){ return name; }		
+			virtual const string&	GetName( ){ return name; }		
 
 		private:
-			String		name;
+			string		name;
 			int			id;	
 		};
 	public:
@@ -179,7 +179,7 @@ namespace fge{
 			return true;
 		}
 		// 创建对象
-		virtual T* CreateComponent( const String& className )
+		virtual T* CreateComponent( const string& className )
 		{
 			return CreateComponent( fge::StrHash(className) );
 		}

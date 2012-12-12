@@ -206,6 +206,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\ServerApp.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\ServerApp.h"
 				>
 			</File>
@@ -244,6 +248,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Net\NetMsg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Net\NetMsg.h"
 				>
 			</File>
@@ -251,38 +259,6 @@
 		<Filter
 			Name="ServerFrame"
 			>
-			<File
-				RelativePath="..\ServerFrame\luaScript.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ServerFrame\main.lua"
-				>
-			</File>
-			<File
-				RelativePath="..\ServerFrame\msgSerialize.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\ServerFrame\msgSerialize.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ServerFrame\netMsgListener.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\ServerFrame\netMsgListener.h"
-				>
-			</File>
-			<File
-				RelativePath="..\ServerFrame\ServerFrame.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\ServerFrame\ServerFrame.h"
-				>
-			</File>
 			<File
 				RelativePath="..\ServerFrame\ServerObject.cpp"
 				>
